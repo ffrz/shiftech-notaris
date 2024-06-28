@@ -24,6 +24,11 @@ return new class extends Migration
             $table->foreign('created_by_uid')->references('id')->on('users')->onDelete('set null');
             $table->foreign('updated_by_uid')->references('id')->on('users')->onDelete('set null');
         });
+
+        Schema::table('users', function(Blueprint $table) {
+            $table->unsignedBigInteger('officer_id')->nullable()->default(null);
+            $table->foreign('officer_id')->references('id')->on('officers')->onDelete('set null');
+        });
     }
 
     /**
@@ -31,6 +36,10 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::table('users', function(Blueprint $table) {
+            $table->dropForeign(['officer_id']);
+            $table->dropColumn('officer_id');
+        });
         Schema::dropIfExists('officers');
     }
 };

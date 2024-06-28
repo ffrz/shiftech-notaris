@@ -57,8 +57,25 @@
             @enderror
           </div>
           <div class="form-group">
+            <label for="officer_id">Officer</label>
+            <select class="custom-select select2 @error('officer_id') is-invalid @enderror" id="officer_id" name="officer_id">
+              <option value="" {{ !$user->officer_id ? 'selected' : '' }}>-- Pilih Officer --</option>
+              @foreach ($officers as $officer)
+                <option value="{{ $officer->id }}" {{ old('officer_id', $user->officer_id) == $officer->id ? 'selected' : '' }}>
+                  {{ $officer->name }}
+                </option>
+              @endforeach
+            </select>
+            @error('officer_id')
+              <span class="text-danger">
+                {{ $message }}
+              </span>
+            @enderror
+          </div>
+          <div class="form-group">
             <div class="custom-control custom-checkbox">
-              <input class="custom-control-input " id="active" name="is_active" type="checkbox" value="1" {{ old('is_active', $user->is_active) ? 'checked="checked"' : '' }}>
+              <input class="custom-control-input " id="active" name="is_active" type="checkbox" value="1"
+                {{ old('is_active', $user->is_active) ? 'checked="checked"' : '' }}>
               <label class="custom-control-label" for="active" title="Akun aktif dapat login">Aktif</label>
             </div>
             <div class="text-muted">Akun aktif dapat login.</div>
@@ -74,9 +91,9 @@
             <div class="form-row col-md-12 mt-4">
               <h5>Hak Akses Pengguna</h5>
             </div>
-            @foreach ($resources as $category => $resource)
+            @foreach ($resources as $key => $resource)
               <div class="p-2 mt-2 mb-2" style="border: 1px solid #ddd;border-radius:5px;">
-                <h5 class="mb-0">{{ $category }}</h5>
+                <h5 class="mb-0">{{ $key }}</h5>
                 @foreach ($resource as $name => $label)
                   @if (is_array($label))
                     <h6 class="mt-3 mb-0">{{ $name }}</h6>
@@ -108,6 +125,7 @@
 @section('footscript')
   <script>
     $(document).ready(function() {
+        $('.select2').select2();
       const on_is_admin_change = function() {
         if ($('#is_admin')[0].checked) {
           $('#acl-editor').hide();
@@ -125,3 +143,4 @@
     });
   </script>
 @endsection
+

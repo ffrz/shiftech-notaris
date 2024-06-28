@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\AclResource;
+use App\Models\Officer;
 use App\Models\UserActivity;
 use App\Models\User;
 use App\Models\UserAccess;
@@ -123,9 +124,26 @@ class UserController extends Controller
             return redirect('admin/user')->with('info', $message);
         }
 
-        $resources = AclResource::all();
+        $all_officers = Officer::all();
+        $officers = [];
+        foreach ($all_officers as $officer) {
+            if ($officer->id != $user->officer_id && !$officer->active) {
+                continue;
+            }
+            $officers[$officer->id] = $officer;
+        }
 
-        return view('admin.user.edit', compact('user', 'resources'));
+        $linked_officer_ids = [];
+        $users = User::all();
+        foreach ($users as $u) {
+            if ($u->id == $user->id) {
+                continue;
+            }
+            unset($officers[$u->officer_id]);
+        }
+
+        $resources = AclResource::all();
+        return view('admin.user.edit', compact('user', 'resources', 'officers'));
     }
 
     public function profile(Request $request)
