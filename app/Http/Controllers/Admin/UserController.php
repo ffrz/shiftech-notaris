@@ -96,9 +96,9 @@ class UserController extends Controller
             $acl = (array)$request->post('acl');
 
             if (!$id) {
-                $message = 'Akun pengguna <b>' . e($data['username']) . '</b> telah dibuat.';
+                $message = 'Akun pengguna ' . e($data['username']) . 'telah dibuat.';
             } else {
-                $message = 'Akun pengguna <b>' . e($data['username']) . '</b> telah diperbarui.';
+                $message = 'Akun pengguna ' . e($data['username']) . 'telah diperbarui.';
             }
 
             DB::beginTransaction();
@@ -124,26 +124,8 @@ class UserController extends Controller
             return redirect('admin/user')->with('info', $message);
         }
 
-        $all_officers = Officer::all();
-        $officers = [];
-        foreach ($all_officers as $officer) {
-            if ($officer->id != $user->officer_id && !$officer->active) {
-                continue;
-            }
-            $officers[$officer->id] = $officer;
-        }
-
-        $linked_officer_ids = [];
-        $users = User::all();
-        foreach ($users as $u) {
-            if ($u->id == $user->id) {
-                continue;
-            }
-            unset($officers[$u->officer_id]);
-        }
-
         $resources = AclResource::all();
-        return view('admin.user.edit', compact('user', 'resources', 'officers'));
+        return view('admin.user.edit', compact('user', 'resources'));
     }
 
     public function profile(Request $request)

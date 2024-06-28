@@ -57,22 +57,6 @@
             @enderror
           </div>
           <div class="form-group">
-            <label for="officer_id">Officer</label>
-            <select class="custom-select select2 @error('officer_id') is-invalid @enderror" id="officer_id" name="officer_id">
-              <option value="" {{ !$user->officer_id ? 'selected' : '' }}>-- Pilih Officer --</option>
-              @foreach ($officers as $officer)
-                <option value="{{ $officer->id }}" {{ old('officer_id', $user->officer_id) == $officer->id ? 'selected' : '' }}>
-                  {{ $officer->name }}
-                </option>
-              @endforeach
-            </select>
-            @error('officer_id')
-              <span class="text-danger">
-                {{ $message }}
-              </span>
-            @enderror
-          </div>
-          <div class="form-group">
             <div class="custom-control custom-checkbox">
               <input class="custom-control-input " id="active" name="is_active" type="checkbox" value="1"
                 {{ old('is_active', $user->is_active) ? 'checked="checked"' : '' }}>

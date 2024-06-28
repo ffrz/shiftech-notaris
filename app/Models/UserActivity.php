@@ -27,6 +27,7 @@ class UserActivity extends Model
     public const WITNESS_MANAGEMENT = 'witness-management';
     public const OFFICER_MANAGEMENT = 'officer-management';
     public const PARTNER_MANAGEMENT = 'partner-management';
+    public const SERVICE_MANAGEMENT = 'service-management';
 
     private static $_types = [
         self::AUTHENTICATION => 'Otentikasi',
@@ -46,6 +47,7 @@ class UserActivity extends Model
         self::WITNESS_MANAGEMENT => 'Pengelolaan Saksi',
         self::OFFICER_MANAGEMENT => 'Pengelolaan Officer',
         self::PARTNER_MANAGEMENT => 'Pengelolaan Partner',
+        self::SERVICE_MANAGEMENT => 'Pengelolaan Layanan',
     ];
 
     protected $casts = [

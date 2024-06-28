@@ -113,6 +113,14 @@
                   </a>
                 </li>
               @endif
+              @if (Auth::user()->canAccess(AclResource::SERVICE_MANAGEMENT))
+                <li class="nav-item">
+                  <a class="nav-link {{ $nav_active == 'service' ? 'active' : '' }}" href="{{ url('/admin/service') }}">
+                    <i class="nav-icon fas fa-list"></i>
+                    <p>Layanan</p>
+                  </a>
+                </li>
+              @endif
               @if (Auth::user()->canAccess(AclResource::WITNESS_MANAGEMENT))
                 <li class="nav-item">
                   <a class="nav-link {{ $nav_active == 'witness' ? 'active' : '' }}" href="{{ url('/admin/witness') }}">
@@ -125,7 +133,7 @@
                 <li class="nav-item">
                   <a class="nav-link {{ $nav_active == 'officer' ? 'active' : '' }}" href="{{ url('/admin/officer') }}">
                     <i class="nav-icon fas fa-users"></i>
-                    <p>Oficcer</p>
+                    <p>Karyawan</p>
                   </a>
                 </li>
               @endif

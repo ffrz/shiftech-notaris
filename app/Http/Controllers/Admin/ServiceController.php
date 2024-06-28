@@ -4,16 +4,17 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\AclResource;
-use App\Models\Officer;
+use App\Models\Service;
 use App\Models\UserActivity;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class OfficerController extends Controller
+class ServiceController extends Controller
 {
+
     public function __construct()
     {
-        ensure_user_can_access(AclResource::OFFICER_MANAGEMENT);
+        ensure_user_can_access(AclResource::SERVICE_MANAGEMENT);
     }
 
     public function index(Request $request)
@@ -23,7 +24,7 @@ class OfficerController extends Controller
             'search' => $request->get('search', ''),
         ];
 
-        $q = Officer::query();
+        $q = Service::query();
 
         if ($filter['active'] != -1) {
             $q->where('active', '=', $filter['active']);
@@ -31,34 +32,27 @@ class OfficerController extends Controller
 
         if (!empty($filter['search'])) {
             $q->where('name', 'like', '%' . $filter['search'] . '%');
-            $q->orWhere('description', 'like', '%' . $filter['search'] . '%');
-            $q->orWhere('notes', 'like', '%' . $filter['notes'] . '%');
         }
 
         $items = $q->orderBy('name', 'asc')->paginate(10);
-        return view('admin.officer.index', compact('items', 'filter'));
+        return view('admin.service.index', compact('items', 'filter'));
     }
 
     public function edit(Request $request, $id = 0)
     {
         if (!$id) {
-            $item = new Officer();
+            $item = new Service();
             $item->active = true;
         } else {
-            $item = Officer::find($id);
-            if (!$item) {
-                return redirect('admin/officer')->with('warning', 'Karyawan tidak ditemukan.');
-            }
+            $item = Service::findOrFail($id);
         }
 
         if ($request->method() == 'POST') {
             $validator = Validator::make($request->all(), [
                 'name' => 'required|max:100',
-                'description' => 'required',
             ], [
-                'name.required' => 'Nama harus diisi.',
-                'name.max' => 'Nama terlalu panjang, maksimal 100 karakter.',
-                'description' => 'Keterangan harus diisi.',
+                'name.required' => 'Nama layanan harus diisi.',
+                'name.max' => 'Nama layanan terlalu panjang, maksimal 100 karakter.',
             ]);
 
             if ($validator->fails())
@@ -67,6 +61,7 @@ class OfficerController extends Controller
             $data = ['Old Data' => $item->toArray()];
 
             $tmpData = $request->all();
+            $tmpData['price'] = number_from_input($tmpData['price']);
             if (empty($tmpData['active']))
                 $tmpData['active'] = false;
 
@@ -75,39 +70,38 @@ class OfficerController extends Controller
             $data['New Data'] = $item->toArray();
 
             UserActivity::log(
-                UserActivity::OFFICER_MANAGEMENT,
-                ($id == 0 ? 'Tambah' : 'Perbarui') . ' Karyawan',
-                'Karyawan ' . e($item->name) . ' telah ' . ($id == 0 ? 'dibuat' : 'diperbarui'),
+                UserActivity::SERVICE_MANAGEMENT,
+                ($id == 0 ? 'Tambah' : 'Perbarui') . ' Layanan',
+                'Layanan ' . e($item->name) . ' telah ' . ($id == 0 ? 'dibuat' : 'diperbarui'),
                 $data
             );
 
-            return redirect('admin/officer')->with('info', 'Karyawan telah disimpan.');
+            return redirect('admin/service')->with('info', 'Layanan telah disimpan.');
         }
 
-        return view('admin.officer.edit', compact('item'));
+        return view('admin.service.edit', compact('item'));
     }
 
     public function duplicate($id)
     {
-        $item = Officer::findOrFail($id);
+        $item = Service::findOrFail($id);
         $item->id = null;
-        return view('admin.officer.edit', compact('item'));
+        return view('admin.service.edit', compact('item'));
     }
 
     public function delete($id)
     {
-        $item = Officer::findOrFail($id);
+        $item = Service::findOrFail($id);
         $item->delete();
 
-        $message = 'Karyawan ' . e($item->name) . ' telah dihapus.';
+        $message = 'Layanan ' . e($item->name) . ' telah dihapus.';
         UserActivity::log(
-            UserActivity::OFFICER_MANAGEMENT,
-            'Hapus Officer',
+            UserActivity::SERVICE_MANAGEMENT,
+            'Hapus Layanan',
             $message,
             $item->toArray()
         );
 
-        return redirect('admin/officer')->with('info', $message);
+        return redirect('admin/service')->with('info', $message);
     }
-
 }
