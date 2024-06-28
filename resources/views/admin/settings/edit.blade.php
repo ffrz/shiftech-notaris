@@ -33,7 +33,7 @@
           <div class="tab-pane fade show active" id="tab1" role="tabpanel" aria-labelledby="tab1-tab">
             <div class="form-horizontal">
               <div class="form-group">
-                <label for="notary_name">Nama Notaris*</label>
+                <label for="notary_name">Nama Notaris <span class="required">*</span></label>
                 <input class="form-control @error('notary_name') is-invalid @enderror" id="notary_name" name="notary_name" type="text"
                   value="{{ old('notary_name', Setting::value('company.notary_name')) }}" placeholder="Contoh: Adi Suryadi SH, M.Kn.">
                 @error('notary_name')
@@ -43,7 +43,7 @@
                 @enderror
               </div>
               <div class="form-group">
-                <label for="notary_name2">Notaris Tersebut*</label>
+                <label for="notary_name2">Notaris Tersebut <span class="required">*</span></label>
                 <input class="form-control @error('notary_name2') is-invalid @enderror" id="notary_name2" name="notary_name2" type="text"
                   value="{{ old('notary_name2', Setting::value('company.notary_name2')) }}" placeholder="Contoh: Adi Suryadi Sarjana Hukum Magister Kenotariatan">
                 @error('notary_name2')
@@ -53,7 +53,7 @@
                 @enderror
               </div>
               <div class="form-group">
-                <label for="notary_type">Pejabat*</label>
+                <label for="notary_type">Pejabat <span class="required">*</span></label>
                 <input class="form-control @error('notary_type') is-invalid @enderror" id="notary_type" name="notary_type" type="text"
                   value="{{ old('notary_type', Setting::value('company.notary_type')) }}">
                 @error('notary_type')
@@ -63,7 +63,7 @@
                 @enderror
               </div>
               <div class="form-group">
-                <label for="company_address">Alamat*</label>
+                <label for="company_address">Alamat <span class="required">*</span></label>
                 <textarea class="form-control @error('company_address') is-invalid @enderror" id="company_address" name="company_address">{{ old('company_address', Setting::value('company.company_address')) }}</textarea>
                 @error('company_address')
                   <span class="text-danger">
@@ -72,7 +72,7 @@
                 @enderror
               </div>
               <div class="form-group">
-                <label for="company_province">Provinsi*</label>
+                <label for="company_province">Provinsi <span class="required">*</span></label>
                 <input class="form-control @error('company_province') is-invalid @enderror" id="company_province" name="company_province"
                   value="{{ old('company_province', Setting::value('company.company_province')) }}">
                 @error('company_province')
@@ -82,7 +82,7 @@
                 @enderror
               </div>
               <div class="form-group">
-                <label for="company_city">Kota / Kabupaten*</label>
+                <label for="company_city">Kota / Kabupaten <span class="required">*</span></label>
                 <input class="form-control @error('company_city') is-invalid @enderror" id="company_city" name="company_city"
                   value="{{ old('company_city', Setting::value('company.company_city')) }}">
                 @error('company_city')
@@ -92,7 +92,7 @@
                 @enderror
               </div>
               <div class="form-group">
-                <label for="company_phone">No Telepon*</label>
+                <label for="company_phone">No Telepon <span class="required">*</span></label>
                 <input class="form-control @error('company_phone') is-invalid @enderror" id="company_phone" name="company_phone" type="text"
                   value="{{ old('company_phone', Setting::value('company.company_phone')) }}">
                 @error('company_phone')
@@ -112,7 +112,7 @@
                 @enderror
               </div>
               <div class="form-group">
-                <label for="company_email">Email*</label>
+                <label for="company_email">Email <span class="required">*</span></label>
                 <input class="form-control @error('company_email') is-invalid @enderror" id="company_email" name="company_email" type="text"
                   value="{{ old('company_email', Setting::value('company.company_email')) }}">
                 @error('company_email')
@@ -182,7 +182,7 @@
                 @enderror
               </div>
               <div class="form-group">
-                <label for="director_name">Nama Direksi*</label>
+                <label for="director_name">Nama Direksi <span class="required">*</span></label>
                 <input class="form-control @error('director_name') is-invalid @enderror" id="director_name" name="director_name" type="text"
                   value="{{ old('director_name', Setting::value('company.director_name')) }}">
                 @error('director_name')
@@ -192,7 +192,7 @@
                 @enderror
               </div>
               <div class="form-group">
-                <label for="cashier_name">Nama Kasir*</label>
+                <label for="cashier_name">Nama Kasir <span class="required">*</span></label>
                 <input class="form-control @error('cashier_name') is-invalid @enderror" id="cashier_name" name="cashier_name" type="text"
                   value="{{ old('cashier_name', Setting::value('company.cashier_name')) }}">
                 @error('cashier_name')

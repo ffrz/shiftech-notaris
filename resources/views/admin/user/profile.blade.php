@@ -23,18 +23,12 @@
               value="{{ $user->username }}">
           </div>
           <div class="form-group">
-            <label for="fullname">Nama Lengkap</label>
+            <label for="fullname">Nama Lengkap <span class="required">*</span></label>
             <input type="text" class="form-control @error('fullname') 'is-invalid' @enderror" autofocus id="fullname"
               placeholder="Nama Lengkap" name="fullname" value="{{ old('fullname', $user->fullname) }}">
             @error('fullname')
               <span class="text-danger">{{ $message }}</span>
             @enderror
-          </div>
-
-          <div class="form-group">
-            <label for="group_id">Grup Pengguna</label>
-            <input type="text" class="form-control" id="group_id" name="group"
-              value="{{ $user->group ? $user->group->name : '' }}" readonly>
           </div>
           <div class="form-group">
             <div class="custom-control custom-checkbox">
@@ -80,7 +74,7 @@
           <h4 class="mb-1">Verifikasi Akun</h4>
           <hr class="mb-3 mt-0">
           <div class="form-group">
-            <label for="current_password">Kata Sandi Saat Ini</label>
+            <label for="current_password">Kata Sandi Saat Ini <span class="required">*</span></label>
             <input type="password" class="form-control @error('current_password') is-invalid @enderror"
               id="current_password" placeholder="Kata Sandi sekarang" name="current_password"
               value="{{ old('current_password') }}">

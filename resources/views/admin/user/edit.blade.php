@@ -24,7 +24,7 @@
         <input name="id" type="hidden" value="{{ (int) $user->id }}">
         <div class="card-body">
           <div class="form-group">
-            <label for="username">Username</label>
+            <label for="username">Username <span class="required">*</span></label>
             <input class="form-control @error('username') is-invalid @enderror" id="username" name="username" type="text" value="{{ old('username', $user->username) }}" autofocus
               placeholder="Username" {{ $user->id ? 'readonly' : '' }}>
             @if (!$user->id)
@@ -35,7 +35,7 @@
             @endif
           </div>
           <div class="form-group">
-            <label for="fullname">Nama Lengkap</label>
+            <label for="fullname">Nama Lengkap <span class="required">*</span></label>
             <input class="form-control @error('fullname') is-invalid @enderror" id="fullname" name="fullname" type="text" value="{{ old('fullname', $user->fullname) }}"
               placeholder="Nama Lengkap">
             @error('fullname')
@@ -43,7 +43,7 @@
             @enderror
           </div>
           <div class="form-group">
-            <label for="password">Kata Sandi</label>
+            <label for="password">Kata Sandi <span class="required">*</span></label>
             <input class="form-control @error('password') is-invalid @enderror" id="password" name="password" type="text" value="{{ old('password') }}" placeholder="Kata Sandi">
             <div class="text-muted">
               @if ($user->id)

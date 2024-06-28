@@ -22,7 +22,7 @@
       <div class="card card-primary">
         <div class="card-body">
           <div class="form-group">
-            <label for="name">Nama Saksi</label>
+            <label for="name">Nama Saksi <span class="required">*</span></label>
             <input class="form-control @error('name') is-invalid @enderror" id="name" name="name" type="text" value="{{ old('name', $item->name) }}" autofocus>
             @error('name')
               <span class="text-danger">
@@ -31,7 +31,7 @@
             @enderror
           </div>
           <div class="form-group">
-            <label for="description">Keterangan</label>
+            <label for="description">Keterangan <span class="required">*</span></label>
             <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description">{{ old('description', $item->description) }}</textarea>
           </div>
           <div class="form-group">
