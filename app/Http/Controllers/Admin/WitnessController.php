@@ -52,9 +52,11 @@ class WitnessController extends Controller
         if ($request->method() == 'POST') {
             $validator = Validator::make($request->all(), [
                 'name' => 'required|max:100',
+                'description' => 'required',
             ], [
                 'name.required' => 'Nama saksi harus diisi.',
                 'name.max' => 'Nama saksi terlalu panjang, maksimal 100 karakter.',
+                'description' => 'Keterangan harus diisi.',
             ]);
 
             if ($validator->fails())

@@ -54,9 +54,11 @@ class OfficerController extends Controller
         if ($request->method() == 'POST') {
             $validator = Validator::make($request->all(), [
                 'name' => 'required|max:100',
+                'description' => 'required',
             ], [
                 'name.required' => 'Nama Officer harus diisi.',
                 'name.max' => 'Nama Officer terlalu panjang, maksimal 100 karakter.',
+                'description' => 'Keterangan harus diisi.',
             ]);
 
             if ($validator->fails())

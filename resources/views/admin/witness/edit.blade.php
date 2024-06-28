@@ -33,6 +33,11 @@
           <div class="form-group">
             <label for="description">Keterangan <span class="required">*</span></label>
             <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description">{{ old('description', $item->description) }}</textarea>
+            @error('description')
+              <span class="text-danger">
+                {{ $message }}
+              </span>
+            @enderror
           </div>
           <div class="form-group">
             <label for="notes">Catatan</label>
