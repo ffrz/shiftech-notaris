@@ -1,14 +1,14 @@
 @extends('admin._layouts.default', [
-    'title' => 'Aktivitas Pengguna',
+    'title' => 'Aktifitas Pengguna',
     'menu_active' => 'system',
     'nav_active' => 'user-activity',
 ])
 
 @section('right-menu')
   <li class="nav-item">
-    <a href="{{ url('/admin/user-activity/clear') }}" class="btn plus-btn btn-default mr-2" title="Hapus"><i
+    <a href="{{ url('/admin/user-activity/clear') }}" class="btn btn-danger mr-2" title="Hapus"><i
         class="fa fa-trash mr-2"></i> Bersihkan</a>
-    <button class="btn btn-default plus-btn mr-2" data-toggle="modal" data-target="#filter-dialog" title="Saring"><i
+    <button class="btn btn-default mr-2" data-toggle="modal" data-target="#filter-dialog" title="Saring"><i
         class="fa fa-filter"></i>
       @if ($filter_active)
         <span class="badge badge-warning">!</span>
@@ -83,7 +83,7 @@
                     <th>Waktu</th>
                     <th>Pengguna</th>
                     <th>Tipe</th>
-                    <th>Aktivitas</th>
+                    <th>Aktifitas</th>
                     <th>Deskripsi</th>
                     <th class="text-center" style="max-width:10%">Aksi</th>
                   </tr>
@@ -100,7 +100,7 @@
                       <td class="text-center">
                         <div class="btn-group">
                           <input name="id" type="hidden" value="{{ $item->id }}">
-                          <a class="btn btn-default btn-sm" href="{{ url("/admin/user-activity/show/$item->id") }}"
+                          <a class="btn btn-default btn-sm" href="{{ url("/admin/user-activity/detail/$item->id") }}"
                             title="Lihat"><i class="fa fa-eye"></i></a>
                           <a class="btn btn-danger btn-sm" href="{{ url("/admin/user-activity/delete/$item->id") }}"
                             title="Hapus" onclick="return confirm('Hapus rekaman?')"><i class="fa fa-trash"></i></a>

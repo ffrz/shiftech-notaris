@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('group_id')->nullable(true)->default(null);
             $table->string('username')->unique();
             $table->string('fullname')->default('');
             $table->string('password')->default('');
@@ -23,7 +22,6 @@ return new class extends Migration
             $table->datetime('updated_datetime')->nullable()->default(null);
             $table->unsignedBigInteger('created_by_uid')->nullable()->default(null);
             $table->unsignedBigInteger('updated_by_uid')->nullable()->default(null);
-            $table->foreign('group_id')->references('id')->on('user_groups');
         });
     }
 

@@ -1,16 +1,23 @@
 @extends('admin._layouts.default', [
-    'title' => 'Aktivitas Pengguna',
+    'title' => 'Aktifitas Pengguna',
     'menu_active' => 'system',
     'nav_active' => 'user-activity',
 ])
 
+@section('right-menu')
+  <li class="nav-item">
+    <a class="btn btn-default" href="{{ url('/admin/user-activity' ) }}"><i class="fas fa-arrow-left mr-1"></i>Kembali</a>
+    <a class="btn btn-danger" href="{{ url('/admin/user-activity/delete/' . $item->id ) }}"><i class="fas fa-trash mr-1" onclick="return confirm('Hapus aktifitas?')"></i>Hapus</a>
+  </li>
+@endSection
+
 @section('content')
   <div class="card card-light">
     <div class="card-body">
-      <h5>Rincian Aktivitas Pengguna</h5>
+      <h5>Rincian Aktifitas Pengguna</h5>
       <table class="table table-sm" style="width='100%;'">
         <tr>
-          <td class="text-nowrap" style="width:5%">#ID Aktivitas</td>
+          <td class="text-nowrap" style="width:5%">#ID Aktifitas</td>
           <td style="width:1%">:</td>
           <td>{{ $item->id }}</td>
         </tr>
@@ -25,12 +32,12 @@
           <td>{{ $item->user_id ? $item->user_id . ' - ' : '' }}{{ $item->username }}</td>
         </tr>
         <tr>
-          <td class="text-nowrap">Tipe Aktivitas</td>
+          <td class="text-nowrap">Tipe Aktifitas</td>
           <td>:</td>
           <td>{{ $item->typeFormatted() }}</td>
         </tr>
         <tr>
-          <td>Aktivitas</td>
+          <td>Aktifitas</td>
           <td>:</td>
           <td>{{ $item->name }}</td>
         </tr>
@@ -84,14 +91,6 @@
           </tr>
         @endif
       </table>
-    </div>
-    <div class="card-footer">
-      <div>
-        <a class="btn btn-default mr-2" href="{{ url('/admin/user-activity') }}">
-          <i class="fas fa-arrow-left mr-1"></i>
-          Kembali
-        </a>
-      </div>
     </div>
   </div>
   </div>

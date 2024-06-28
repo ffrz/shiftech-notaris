@@ -4,8 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class UserGroupAccess extends Model
-{    
+class UserAccess extends Model
+{
     public $timestamps = false;
     /**
      * The attributes that are mass assignable.
@@ -13,6 +13,6 @@ class UserGroupAccess extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'group_id', 'resource', 'allow'
+        'user_id', 'resource', 'allow'
     ];
 }

@@ -25,7 +25,13 @@ class UserSeeder extends Seeder
             'is_active' => true,
             'is_admin' => true,
             'fullname' => 'Administrator',
-            'group_id' => 1,
+        ]);
+        User::insert([
+            'username' => 'owner',
+            'password' => Hash::make('12345'),
+            'is_active' => true,
+            'is_admin' => true,
+            'fullname' => 'Owner',
         ]);
         User::insert([
             'username' => 'kasir',
@@ -33,7 +39,6 @@ class UserSeeder extends Seeder
             'is_active' => true,
             'is_admin' => false,
             'fullname' => 'Kasir',
-            'group_id' => 2,
         ]);
 
         // $faker = \Faker\Factory::create('id_ID');

@@ -1,5 +1,5 @@
 @extends('admin._layouts.default', [
-    'title' => 'Bersihkan Aktivitas Pengguna',
+    'title' => 'Bersihkan Aktifitas Pengguna',
     'menu_active' => 'system',
     'nav_active' => 'user-activity',
 ])

@@ -11,8 +11,8 @@
 
 @section('right-menu')
   <li class="nav-item">
-    <button type="submit" class="btn btn-primary mr-1"><i class="fas fa-save mr-1"></i> Simpan</button>
-    <a onclick="return confirm('Batalkan perubahan?')" class="btn btn-default" href="{{ url('/admin/user/') }}"><i
+    <button class="btn btn-primary mr-1" type="submit"><i class="fas fa-save mr-1"></i> Simpan</button>
+    <a class="btn btn-default" href="{{ url('/admin/user/') }}" onclick="return confirm('Batalkan perubahan?')"><i
         class="fas fa-cancel mr-1"></i>Batal</a>
   </li>
 @endSection
@@ -21,13 +21,12 @@
   <div class="row">
     <div class="col-lg-5">
       <div class="card card-primary">
-        <input type="hidden" name="id" value="{{ (int) $user->id }}">
+        <input name="id" type="hidden" value="{{ (int) $user->id }}">
         <div class="card-body">
           <div class="form-group">
             <label for="username">Username</label>
-            <input type="text" class="form-control @error('username') is-invalid @enderror" autofocus id="username"
-              placeholder="Username" name="username" {{ $user->id ? 'readonly' : '' }}
-              value="{{ old('username', $user->username) }}">
+            <input class="form-control @error('username') is-invalid @enderror" id="username" name="username" type="text" value="{{ old('username', $user->username) }}" autofocus
+              placeholder="Username" {{ $user->id ? 'readonly' : '' }}>
             @if (!$user->id)
               <p class="text-muted">Setelah disimpan username tidak bisa diganti.</p>
               @error('username')
@@ -37,51 +36,92 @@
           </div>
           <div class="form-group">
             <label for="fullname">Nama Lengkap</label>
-            <input type="text" class="form-control @error('fullname') is-invalid @enderror" id="fullname"
-              placeholder="Nama Lengkap" name="fullname" value="{{ old('fullname', $user->fullname) }}">
+            <input class="form-control @error('fullname') is-invalid @enderror" id="fullname" name="fullname" type="text" value="{{ old('fullname', $user->fullname) }}"
+              placeholder="Nama Lengkap">
             @error('fullname')
               <span class="text-danger">{{ $message }}</span>
             @enderror
           </div>
           <div class="form-group">
-            <label for="group_id">Grup Pengguna</label>
-            <select class="custom-select select2" id="group_id" name="group_id">
-              <option value="" {{ !$user->group_id ? 'selected' : '' }}>-- Pilih Grup Pengguna --</option>
-              @foreach ($groups as $group)
-                <option value="{{ $group->id }}" {{ old('group_id', $user->group_id) == $group->id ? 'selected' : '' }}
-                  title="{{ $group->description }}">
-                  {{ $group->name }}
-                </option>
-              @endforeach
-            </select>
-          </div>
-          <div class="form-group">
             <label for="password">Kata Sandi</label>
-            <input type="text" class="form-control @error('password') is-invalid @enderror" id="password"
-              placeholder="Kata Sandi" name="password" value="{{ old('password') }}">
-            <div class="text-muted">Isi untuk mengganti kata sandi.</div>
+            <input class="form-control @error('password') is-invalid @enderror" id="password" name="password" type="text" value="{{ old('password') }}" placeholder="Kata Sandi">
+            <div class="text-muted">
+              @if ($user->id)
+                Isi apabila ingin mengatur ulang kata sandi.
+              @else
+                Buat kata sandi baru.
+              @endif
+            </div>
             @error('password')
               <span class="text-danger">{{ $message }}</span>
             @enderror
           </div>
           <div class="form-group">
             <div class="custom-control custom-checkbox">
-              <input type="checkbox" class="custom-control-input " id="active" name="is_active" value="1"
-                {{ old('is_active', $user->is_active) ? 'checked="checked"' : '' }}>
+              <input class="custom-control-input " id="active" name="is_active" type="checkbox" value="1" {{ old('is_active', $user->is_active) ? 'checked="checked"' : '' }}>
               <label class="custom-control-label" for="active" title="Akun aktif dapat login">Aktif</label>
             </div>
             <div class="text-muted">Akun aktif dapat login.</div>
           </div>
           <div class="form-group">
             <div class="custom-control custom-checkbox">
-              <input type="checkbox" class="custom-control-input " id="is_admin" name="is_admin" value="1"
-                {{ old('is_admin', $user->is_admin) ? 'checked="checked"' : '' }}>
+              <input class="custom-control-input " id="is_admin" name="is_admin" type="checkbox" value="1" {{ old('is_admin', $user->is_admin) ? 'checked="checked"' : '' }}>
               <label class="custom-control-label" for="is_admin" title="Akun pengguna pengelola">Administrator</label>
             </div>
             <p class="text-muted">Akun administrator memiliki hak akses penuh pada sistem.</p>
+          </div>
+          <div class="form-group" id="acl-editor">
+            <div class="form-row col-md-12 mt-4">
+              <h5>Hak Akses Pengguna</h5>
+            </div>
+            @foreach ($resources as $category => $resource)
+              <div class="p-2 mt-2 mb-2" style="border: 1px solid #ddd;border-radius:5px;">
+                <h5 class="mb-0">{{ $category }}</h5>
+                @foreach ($resource as $name => $label)
+                  @if (is_array($label))
+                    <h6 class="mt-3 mb-0">{{ $name }}</h6>
+                    <div class="d-flex flex-row flex-wrap">
+                      @foreach ($label as $subname => $sublabel)
+                        <div class="mr-3 custom-control custom-checkbox">
+                          <input class="custom-control-input" id="{{ $subname }}" name="acl[{{ $subname }}]" type="checkbox" value="1"
+                            @if (isset($user->acl()[$subname]) && $user->acl()[$subname] == true) {{ 'checked="checked"' }} @endif>
+                          <label class="custom-control-label" for="{{ $subname }}" style="font-weight:normal; white-space: nowrap;">{{ $sublabel }}</label>
+                        </div>
+                      @endforeach
+                    </div>
+                  @else
+                    <div class="custom-control custom-checkbox">
+                      <input class="custom-control-input" id="{{ $name }}" name="acl[{{ $name }}]" type="checkbox" value="1"
+                        @if (isset($user->acl()[$name]) && $user->acl()[$name] == true) {{ 'checked="checked"' }} @endif>
+                      <label class="custom-control-label" for="{{ $name }}" style="font-weight:normal; white-space: nowrap;">{{ $label }}</label>
+                    </div>
+                  @endif
+                @endforeach
+              </div>
+            @endforeach
           </div>
         </div>
       </div>
     </div>
   </div>
 @endSection
+@section('footscript')
+  <script>
+    $(document).ready(function() {
+      const on_is_admin_change = function() {
+        if ($('#is_admin')[0].checked) {
+          $('#acl-editor').hide();
+        } else {
+          $('#acl-editor').show();
+        }
+      }
+
+      $('.is-invalid').focus();
+      $('#is_admin').change(function() {
+        on_is_admin_change();
+      });
+
+      on_is_admin_change();
+    });
+  </script>
+@endsection

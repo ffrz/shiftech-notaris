@@ -59,17 +59,17 @@ class UserActivityController extends Controller
         return view('admin.user-activity.index', compact('items', 'filter', 'users', 'types', 'filter_active'));
     }
 
-    public function show(Request $request, $id = 0)
+    public function detail(Request $request, $id = 0)
     {
         $item = UserActivity::findOrFail($id);
-        return view('admin.user-activity.show', compact('item'));
+        return view('admin.user-activity.detail', compact('item'));
     }
 
     public function delete(Request $request, $id)
     {
         $item = UserActivity::findOrFail($id);
         $item->delete();
-        return redirect('admin/user-activity')->with('info', 'Rekaman log aktivitas <b>#' . $item->id . '</b> telah dihapus.');
+        return redirect('admin/user-activity')->with('info', 'Rekaman log aktifitas <b>#' . $item->id . '</b> telah dihapus.');
     }
 
     public function clear(Request $request)
@@ -84,11 +84,11 @@ class UserActivityController extends Controller
 
             $sql = 'DELETE FROM user_activities';
             $where = [];
-            
+
             if (!empty($data['type'])) {
                 $where[] = 'type=' . $data['type'];
             }
-            
+
             if (!empty($data['user_id'])) {
                 $where[] = 'user_id=' . $data['user_id'];
             }

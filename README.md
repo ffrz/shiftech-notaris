@@ -5,7 +5,7 @@ Shiftech Notaris adalah aplikasi manajemen untuk kantor Notaris / PPAT berbasis 
 ## Fitur-fitur Shiftech Notaris
 - Pengaturan Profil Notaris/PPAT
 - Manajemen Pengguna dan Grup
-- Log Aktivitas Pengguna
+- Log Aktifitas Pengguna
 - Pengaturan hak akses pengguna berbasi Grup Pengguna
 - Manajemen Saksi
 - Laporan-laporan

@@ -42,15 +42,24 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function group()
+    protected $_acl = null;
+
+    public function acl()
     {
-        return $this->belongsTo(UserGroup::class);
+        if ($this->_acl === null) {
+            $this->_acl = [];
+            $rows = UserAccess::get()->where('user_id', '=', $this->id);
+            foreach ($rows as $row) {
+                $this->_acl[$row->resource] = $row->allow;
+            }
+        }
+        return $this->_acl;
     }
 
     public function canAccess($resource)
     {
         if ($this->is_admin) return true;
-        $acl = $this->group->acl();
+        $acl = $this->acl();
         return isset($acl[$resource]) && $acl[$resource] == true;
     }
 

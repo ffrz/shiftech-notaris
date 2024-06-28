@@ -43,7 +43,7 @@ Route::redirect('/admin', '/admin/dashboard');
 Route::middleware([OnlyGuest::class])->group(function () {
     Route::get('admin/login', [AuthController::class, 'login'])->name('login');
     Route::post('admin/login', [AuthController::class, 'authenticate']);
-    Route::get('track-service-order/{id}', [PublicServiceOrderController::class, 'track']);
+    Route::get('track/{id}', [PublicServiceOrderController::class, 'track']);
 });
 
 Route::middleware([Authenticate::class, OnlyAdmin::class])->prefix('admin')->group(function () {
@@ -53,10 +53,6 @@ Route::middleware([Authenticate::class, OnlyAdmin::class])->prefix('admin')->gro
 
     Route::controller(ReportController::class)->prefix('report')->group(function () {
         Route::get('', 'index');
-        Route::get('inventory-stock', 'inventoryStock');
-        Route::get('inventory-minimum-stock', 'inventoryMinimumStock');
-        Route::get('inventory-stock-recap-by-category', 'inventoryStockRecapByCategory');
-        Route::get('inventory-stock-detail-by-category', 'inventoryStockDetailByCategory');
     });
 
     Route::controller(CustomerController::class)->prefix('customer')->group(function () {
@@ -71,12 +67,6 @@ Route::middleware([Authenticate::class, OnlyAdmin::class])->prefix('admin')->gro
         Route::post('save', 'save');
     });
 
-    Route::controller(UserGroupController::class)->prefix('user-group')->group(function () {
-        Route::get('', 'index');
-        Route::match(['get', 'post'], 'edit/{id}', 'edit');
-        Route::get('delete/{id}', 'delete');
-    });
-
     Route::controller(UserController::class)->prefix('user')->group(function () {
         Route::get('', 'index');
         Route::match(['get', 'post'], 'edit/{id}', 'edit');
@@ -86,7 +76,7 @@ Route::middleware([Authenticate::class, OnlyAdmin::class])->prefix('admin')->gro
 
     Route::controller(UserActivityController::class)->prefix('user-activity')->group(function () {
         Route::get('', 'index');
-        Route::get('show/{id}', 'show');
+        Route::get('detail/{id}', 'detail');
         Route::get('delete/{id}', 'delete');
         Route::match(['get', 'post'],'clear', 'clear');
     });

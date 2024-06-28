@@ -48,7 +48,7 @@
             }
           </style>
           <div class="form-row col-md-12 mt-4">
-            <h5>Hak Akses Grup</h5>
+            <h5>Hak Akses Pengguna</h5>
           </div>
           @foreach ($resources as $category => $resource)
             <div class="p-2 mt-2 mb-2" style="border: 1px solid #ddd;border-radius:5px;">

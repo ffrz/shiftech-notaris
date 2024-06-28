@@ -6,7 +6,7 @@
 
 @section('right-menu')
   <li class="nav-item">
-    <a href="{{ url('/admin/cash-transaction-category/edit/0') }}" class="btn plus-btn btn-primary mr-2" title="Baru"><i
+    <a href="{{ url('/admin/cash-transaction-category/edit/0') }}" class="btn  btn-primary mr-2" title="Baru"><i
         class="fa fa-plus"></i></a>
   </li>
 @endSection

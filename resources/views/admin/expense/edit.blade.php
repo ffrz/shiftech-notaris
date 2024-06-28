@@ -33,7 +33,7 @@
           </div>
           <div class="form-group">
             <label for="category_id">Kategori
-              <button class="btn btn-sm btn-default plus-btn" data-toggle="modal" data-target="#category-dialog" type="button" title="Tambah">
+              <button class="btn btn-sm btn-default " data-toggle="modal" data-target="#category-dialog" type="button" title="Tambah">
                 <i class="fa fa-plus"></i>
               </button>
             </label>

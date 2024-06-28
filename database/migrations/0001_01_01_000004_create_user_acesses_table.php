@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('user_group_accesses', function (Blueprint $table) {
-            $table->unsignedBigInteger('group_id');
+        Schema::create('user_accesses', function (Blueprint $table) {
+            $table->unsignedBigInteger('user_id');
             $table->string('resource');
             $table->boolean('allow')->default(true);
-            $table->primary(['group_id', 'resource']);
-            $table->foreign('group_id')->references('id')->on('user_groups')->onDelete('cascade');
+            $table->primary(['user_id', 'resource']);
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('user_group_accesses');
+        Schema::dropIfExists('user_accesses');
     }
 };
