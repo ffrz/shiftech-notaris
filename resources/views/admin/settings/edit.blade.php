@@ -4,7 +4,7 @@
 
 @extends('admin._layouts.default', [
     'title' => 'Pengaturan',
-    'menu_active' => 'system',
+    'menu_active' => 'back_office',
     'nav_active' => 'settings',
     'form_action' => url('admin/settings/save'),
 ])

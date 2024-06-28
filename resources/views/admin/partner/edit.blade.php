@@ -4,7 +4,7 @@
 
 @extends('admin._layouts.default', [
     'title' => $title,
-    'menu_active' => 'system',
+    'menu_active' => 'back_office',
     'nav_active' => 'partner',
     'form_action' => url('admin/partner/edit/' . (int) $item->id),
 ])

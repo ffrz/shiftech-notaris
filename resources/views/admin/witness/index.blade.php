@@ -1,6 +1,6 @@
 @extends('admin._layouts.default', [
     'title' => 'Saksi',
-    'menu_active' => 'system',
+    'menu_active' => 'back_office',
     'nav_active' => 'witness',
 ])
 

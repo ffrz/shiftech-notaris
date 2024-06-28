@@ -94,25 +94,17 @@
         @endif
         {{-- End Report Menu --}}
 
-        {{-- System Menu --}}
+        {{-- Back Office Menu --}}
         @if (Auth::user()->canAccess(AclResource::SYSTEM_MENU))
-          <li class="nav-item {{ $menu_active == 'system' ? 'menu-open' : '' }}">
-            <a class="nav-link {{ $menu_active == 'system' ? 'active' : '' }}" href="#">
-              <i class="nav-icon fas fa-gears"></i>
+          <li class="nav-item {{ $menu_active == 'back_office' ? 'menu-open' : '' }}">
+            <a class="nav-link {{ $menu_active == 'back_office' ? 'active' : '' }}" href="#">
+              <i class="nav-icon fas fa-building"></i>
               <p>
-                Sistem
+                Back Office
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
-              @if (Auth::user()->canAccess(AclResource::USER_ACTIVITY))
-                <li class="nav-item">
-                  <a class="nav-link {{ $nav_active == 'user-activity' ? 'active' : '' }}" href="{{ url('/admin/user-activity') }}">
-                    <i class="nav-icon fas fa-file-waveform"></i>
-                    <p>Log Aktifitas</p>
-                  </a>
-                </li>
-              @endif
               @if (Auth::user()->canAccess(AclResource::SERVICE_MANAGEMENT))
                 <li class="nav-item">
                   <a class="nav-link {{ $nav_active == 'service' ? 'active' : '' }}" href="{{ url('/admin/service') }}">
@@ -145,19 +137,43 @@
                   </a>
                 </li>
               @endif
-              @if (Auth::user()->canAccess(AclResource::USER_MANAGEMENT))
-                <li class="nav-item">
-                  <a class="nav-link {{ $nav_active == 'user' ? 'active' : '' }}" href="{{ url('/admin/user') }}">
-                    <i class="nav-icon fas fa-users"></i>
-                    <p>Pengguna</p>
-                  </a>
-                </li>
-              @endif
               @if (Auth::user()->canAccess(AclResource::SETTINGS))
                 <li class="nav-item">
                   <a class="nav-link {{ $nav_active == 'settings' ? 'active' : '' }}" href="{{ url('/admin/settings') }}">
                     <i class="nav-icon fas fa-gear"></i>
                     <p>Pengaturan</p>
+                  </a>
+                </li>
+              @endif
+            </ul>
+          </li>
+        @endif
+        {{-- End of Back Office  menu --}}
+
+        {{-- System Menu --}}
+        @if (Auth::user()->canAccess(AclResource::SYSTEM_MENU))
+          <li class="nav-item {{ $menu_active == 'system' ? 'menu-open' : '' }}">
+            <a class="nav-link {{ $menu_active == 'system' ? 'active' : '' }}" href="#">
+              <i class="nav-icon fas fa-gears"></i>
+              <p>
+                Sistem
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              @if (Auth::user()->canAccess(AclResource::USER_ACTIVITY))
+                <li class="nav-item">
+                  <a class="nav-link {{ $nav_active == 'user-activity' ? 'active' : '' }}" href="{{ url('/admin/user-activity') }}">
+                    <i class="nav-icon fas fa-file-waveform"></i>
+                    <p>Log Aktifitas</p>
+                  </a>
+                </li>
+              @endif
+              @if (Auth::user()->canAccess(AclResource::USER_MANAGEMENT))
+                <li class="nav-item">
+                  <a class="nav-link {{ $nav_active == 'user' ? 'active' : '' }}" href="{{ url('/admin/user') }}">
+                    <i class="nav-icon fas fa-users"></i>
+                    <p>Pengguna</p>
                   </a>
                 </li>
               @endif
