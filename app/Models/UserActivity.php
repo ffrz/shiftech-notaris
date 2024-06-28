@@ -26,6 +26,7 @@ class UserActivity extends Model
     public const CASH_TRANSACTION_MANAGEMENT = 'cash-transaction-management';
     public const WITNESS_MANAGEMENT = 'witness-management';
     public const OFFICER_MANAGEMENT = 'officer-management';
+    public const PARTNER_MANAGEMENT = 'partner-management';
 
     private static $_types = [
         self::AUTHENTICATION => 'Otentikasi',
@@ -44,6 +45,7 @@ class UserActivity extends Model
         self::CASH_TRANSACTION_MANAGEMENT => 'Pengelolaan Transaksi Keuangan',
         self::WITNESS_MANAGEMENT => 'Pengelolaan Saksi',
         self::OFFICER_MANAGEMENT => 'Pengelolaan Officer',
+        self::PARTNER_MANAGEMENT => 'Pengelolaan Partner',
     ];
 
     protected $casts = [

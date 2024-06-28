@@ -105,6 +105,14 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
+              @if (Auth::user()->canAccess(AclResource::USER_ACTIVITY))
+                <li class="nav-item">
+                  <a class="nav-link {{ $nav_active == 'user-activity' ? 'active' : '' }}" href="{{ url('/admin/user-activity') }}">
+                    <i class="nav-icon fas fa-file-waveform"></i>
+                    <p>Log Aktifitas</p>
+                  </a>
+                </li>
+              @endif
               @if (Auth::user()->canAccess(AclResource::WITNESS_MANAGEMENT))
                 <li class="nav-item">
                   <a class="nav-link {{ $nav_active == 'witness' ? 'active' : '' }}" href="{{ url('/admin/witness') }}">
@@ -121,11 +129,11 @@
                   </a>
                 </li>
               @endif
-              @if (Auth::user()->canAccess(AclResource::USER_ACTIVITY))
+              @if (Auth::user()->canAccess(AclResource::PARTNER_MANAGEMENT))
                 <li class="nav-item">
-                  <a class="nav-link {{ $nav_active == 'user-activity' ? 'active' : '' }}" href="{{ url('/admin/user-activity') }}">
-                    <i class="nav-icon fas fa-file-waveform"></i>
-                    <p>Log Aktifitas</p>
+                  <a class="nav-link {{ $nav_active == 'partner' ? 'active' : '' }}" href="{{ url('/admin/partner') }}">
+                    <i class="nav-icon fas fa-users"></i>
+                    <p>Partner</p>
                   </a>
                 </li>
               @endif

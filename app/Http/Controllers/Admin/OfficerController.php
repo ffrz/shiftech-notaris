@@ -85,6 +85,13 @@ class OfficerController extends Controller
         return view('admin.officer.edit', compact('item'));
     }
 
+    public function duplicate($id)
+    {
+        $item = Officer::findOrFail($id);
+        $item->id = null;
+        return view('admin.officer.edit', compact('item'));
+    }
+
     public function delete($id)
     {
         $item = Officer::findOrFail($id);

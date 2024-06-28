@@ -25,6 +25,7 @@ class AclResource
     const USER_GROUP_MANAGEMENT = 'user-group-management';
     const WITNESS_MANAGEMENT = 'witness-management';
     const OFFICER_MANAGEMENT = 'officer-management';
+    const PARTNER_MANAGEMENT = 'partner-management';
     const SETTINGS = 'settings';
 
     // cash transaction
@@ -59,6 +60,7 @@ class AclResource
                 self::SETTINGS => 'Pengaturan',
                 self::WITNESS_MANAGEMENT => 'Kelola Saksi',
                 self::OFFICER_MANAGEMENT => 'Kelola Officer',
+                self::PARTNER_MANAGEMENT => 'Kelola Partner',
             ]
         ];
     }

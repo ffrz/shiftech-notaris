@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ExpenseController;
 use App\Http\Controllers\Admin\OfficerController;
+use App\Http\Controllers\Admin\PartnerController;
 use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Admin\SettingsController;
 use App\Http\Controllers\Admin\UserActivityController;
@@ -85,12 +86,21 @@ Route::middleware([Authenticate::class, OnlyAdmin::class])->prefix('admin')->gro
         Route::get('', 'index');
         Route::match(['get', 'post'], 'edit/{id}', 'edit');
         Route::get('delete/{id}', 'delete');
+        Route::get('duplicate/{id}', 'duplicate');
     });
 
     Route::controller(OfficerController::class)->prefix('officer')->group(function () {
         Route::get('', 'index');
         Route::match(['get', 'post'], 'edit/{id}', 'edit');
         Route::get('delete/{id}', 'delete');
+        Route::get('duplicate/{id}', 'duplicate');
+    });
+
+    Route::controller(PartnerController::class)->prefix('partner')->group(function () {
+        Route::get('', 'index');
+        Route::match(['get', 'post'], 'edit/{id}', 'edit');
+        Route::get('delete/{id}', 'delete');
+        Route::get('duplicate/{id}', 'duplicate');
     });
 
     Route::controller(ExpenseCategoryController::class)->prefix('expense-category')->group(function () {

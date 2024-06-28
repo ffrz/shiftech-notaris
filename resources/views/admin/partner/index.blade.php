@@ -1,12 +1,12 @@
 @extends('admin._layouts.default', [
-    'title' => 'Saksi',
+    'title' => 'Partner',
     'menu_active' => 'system',
-    'nav_active' => 'witness',
+    'nav_active' => 'partner',
 ])
 
 @section('right-menu')
   <li class="nav-item">
-    <a class="btn  btn-primary mr-2" href="{{ url('/admin/witness/edit/0') }}" title="Baru"><i
+    <a class="btn  btn-primary mr-2" href="{{ url('/admin/partner/edit/0') }}" title="Baru"><i
         class="fa fa-plus"></i></a>
   </li>
 @endSection
@@ -40,9 +40,9 @@
             <table class="table table-bordered table-striped table-sm">
               <thead>
                 <tr>
-                  <th style="width:30%">Nama Saksi</th>
-                  <th>Keterangan</th>
-                  <th>Catatan</th>
+                  <th style="width:30%">Nama Partner</th>
+                  <th>Area Kerja</th>
+                  <th>Alamat</th>
                   <th>Status</th>
                   <th style="width:5%">Aksi</th>
                 </tr>
@@ -51,14 +51,14 @@
                 @forelse ($items as $item)
                   <tr>
                     <td>{{ $item->name }}</td>
-                    <td>{{ $item->description }}</td>
-                    <td>{{ $item->notes }}</td>
+                    <td>{{ $item->area }}</td>
+                    <td>{{ $item->address }}</td>
                     <td>{{ $item->active ? 'Aktif' : 'Tidak Aktif' }}</td>
                     <td class="text-center">
                       <div class="btn-group">
-                        <a class="btn btn-default btn-sm" href="{{ url("/admin/witness/edit/$item->id") }}"><i class="fa fa-edit"></i></a>
-                        <a class="btn btn-default btn-sm" href="{{ url("/admin/witness/duplicate/$item->id") }}"><i class="fa fa-copy"></i></a>
-                        <a class="btn btn-danger btn-sm" href="{{ url("/admin/witness/delete/$item->id") }}" onclick="return confirm('Anda yakin akan menghapus rekaman ini?')"><i
+                        <a class="btn btn-default btn-sm" href="{{ url("/admin/partner/edit/$item->id") }}"><i class="fa fa-edit"></i></a>
+                        <a class="btn btn-default btn-sm" href="{{ url("/admin/partner/duplicate/$item->id") }}"><i class="fa fa-copy"></i></a>
+                        <a class="btn btn-danger btn-sm" href="{{ url("/admin/partner/delete/$item->id") }}" onclick="return confirm('Anda yakin akan menghapus rekaman ini?')"><i
                             class="fa fa-trash"></i></a>
                       </div>
                     </td>

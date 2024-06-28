@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
             PartySeeder::class,
             WitnessSeeder::class,
             OfficerSeeder::class,
+            PartnerSeeder::class,
             ExpenseCategorySeeder::class,
         ]);
     }

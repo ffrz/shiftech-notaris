@@ -57,6 +57,7 @@
                     <td class="text-center">
                       <div class="btn-group">
                         <a class="btn btn-default btn-sm" href="{{ url("/admin/officer/edit/$item->id") }}"><i class="fa fa-edit"></i></a>
+                        <a class="btn btn-default btn-sm" href="{{ url("/admin/officer/duplicate/$item->id") }}"><i class="fa fa-copy"></i></a>
                         <a class="btn btn-danger btn-sm" href="{{ url("/admin/officer/delete/$item->id") }}" onclick="return confirm('Anda yakin akan menghapus rekaman ini?')"><i
                             class="fa fa-trash"></i></a>
                       </div>
