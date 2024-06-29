@@ -30,6 +30,7 @@ class AclResource
     const SERVICE_MANAGEMENT = 'service-management';
     const SETTINGS = 'settings';
     const CUSTOMER_MANAGEMENT = 'customer-management';
+    const ORDER_MANAGEMENT = 'order-management';
 
     // cash transaction
     const CASH_TRANSACTION_CATEGORY_MANAGEMENT = 'cash-transaction-category-management';
@@ -45,6 +46,7 @@ class AclResource
         return [
             'Manajemen Order' => [
                 self::ORDER_MENU => 'Menu Pesanan',
+                self::ORDER_MANAGEMENT => 'Kelola Order',
                 self::CUSTOMER_MANAGEMENT => 'Kelola Pelanggan',
             ],
             'Manajemen Keuangan' => [

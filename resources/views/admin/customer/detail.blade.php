@@ -1,12 +1,10 @@
 @php
   $title = 'Rincian Klien';
-  use App\Models\StockUpdate;
-  use App\Models\ServiceOrder;
 @endphp
 
 @extends('admin._layouts.default', [
     'title' => $title,
-    'menu_active' => 'sales',
+    'menu_active' => 'order',
     'nav_active' => 'customer',
 ])
 
@@ -46,16 +44,8 @@
                     <td>{{ $item->active ? 'Aktif' : 'Non Aktif' }}</td>
                   </tr>
                   <tr>
-                    <td class="text-nowrap">Jumlah Order</td>
-                    <td>{{ format_number($item->sales_count) }} kali</td>
-                  </tr>
-                  <tr>
-                    <td class="text-nowrap">Total Transaksi</td>
-                    <td>Rp. {{ format_number($item->total_sales) }}</td>
-                  </tr>
-                  <tr>
-                    <td class="text-nowrap">Total Keuntungan</td>
-                    <td>Rp. {{ format_number($item->total_profit) }}</td>
+                    <td class="text-nowrap">Total Order</td>
+                    <td>Rp. {{ format_number($item->total_order) }}</td>
                   </tr>
                   <tr>
                     <td class="text-nowrap">Total Piutang</td>

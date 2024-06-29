@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             ServiceSeeder::class,
             CustomerSeeder::class,
             ExpenseCategorySeeder::class,
+            OrderSeeder::class,
         ]);
     }
 }

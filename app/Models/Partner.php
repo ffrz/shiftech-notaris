@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Partner extends BaseModel
 {
     use HasFactory;
+
     /**
      * The attributes that are mass assignable.
      *

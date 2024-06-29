@@ -33,7 +33,7 @@
                 <div class="form-group form-inline">
                   <label class="mr-2" for="search">Cari:</label>
                   <input type="text" class="form-control" name="search" id="search" value="{{ $filter['search'] }}"
-                    placeholder="Cari produk">
+                    placeholder="Cari klien">
                 </div>
               </div>
             </div>

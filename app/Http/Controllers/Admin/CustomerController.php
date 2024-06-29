@@ -111,6 +111,15 @@ class CustomerController extends Controller
     public function detail($id)
     {
         $item = Customer::findOrFail($id);
+        $item->order_count = $item->total_sales = DB::select('select ifnull(count(0), 0) as count from orders where customer_id=:customer_id', [
+            'customer_id' => $id,
+        ])[0]->count;
+        $item->total_order = $item->total_sales = DB::select('select ifnull(sum(total), 0) as sum from orders where customer_id=:customer_id', [
+            'customer_id' => $id,
+        ])[0]->sum;
+        $item->total_receivable = $item->total_sales = DB::select('select ifnull(sum(total-total_paid), 0) as sum from orders where customer_id=:customer_id', [
+            'customer_id' => $id,
+        ])[0]->sum;
         return view('admin.customer.detail', compact('item'));
     }
 }
