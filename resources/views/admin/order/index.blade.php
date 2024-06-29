@@ -1,5 +1,5 @@
 @extends('admin._layouts.default', [
-    'title' => 'Klien',
+    'title' => 'Pesanan',
     'menu_active' => 'order',
     'nav_active' => 'order',
 ])
@@ -32,7 +32,7 @@
               <div class="col-md-6 d-flex justify-content-end">
                 <div class="form-group form-inline">
                   <label class="mr-2" for="search">Cari:</label>
-                  <input class="form-control" id="search" name="search" type="text" value="{{ $filter['search'] }}" placeholder="Cari order">
+                  <input class="form-control" id="search" name="search" type="text" value="{{ $filter['search'] }}" placeholder="Cari berdasarkan klien">
                 </div>
               </div>
             </div>

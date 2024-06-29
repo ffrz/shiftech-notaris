@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->boolean('active')->default(true);
             $table->string('name', 100);
+            $table->string('email', 255);
             $table->string('phone', 100)->default('');
             $table->text('address')->nullable()->default(null);
             $table->text('notes')->nullable()->default(null);

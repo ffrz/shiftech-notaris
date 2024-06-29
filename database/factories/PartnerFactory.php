@@ -18,8 +18,9 @@ class PartnerFactory extends Factory
      */
     public function definition(): array
     {
+        $gender = fake()->randomElement(['male', 'female']);
         return [
-            'name' => fake()->name(),
+            'name' => fake()->firstName($gender) . ' ' . fake()->lastName($gender) . ', S.H., M.Kn.',
             'area' => fake()->city(),
             'address' => fake()->address(),
             'active' => fake()->randomElement([true, false]),

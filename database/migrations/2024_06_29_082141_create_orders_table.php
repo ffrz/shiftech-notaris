@@ -20,6 +20,9 @@ return new class extends Migration
             $table->date('date');
             $table->date('closed_date')->nullable();
             $table->string('description', 200);
+            $table->string('deed_number')->default('');
+            $table->string('file_number')->default('');
+            $table->string('deed_properties')->default('');
             $table->decimal('total', 12);
             $table->decimal('total_paid', 12)->default(0.);
             $table->text('notes');

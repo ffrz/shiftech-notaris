@@ -8,6 +8,6 @@ class Customer extends BaseModel
 {
     use HasFactory;
     protected $fillable = [
-        'active', 'name', 'phone', 'address', 'notes',
+        'active', 'name', 'phone', 'email', 'address', 'notes',
     ];
 }

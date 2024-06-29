@@ -18,9 +18,11 @@ class CustomerFactory extends Factory
      */
     public function definition(): array
     {
+        $gender = fake()->randomElement(['male', 'female']);
         return [
-            'name' => fake()->name(),
+            'name' => fake()->firstName($gender) . ' ' . fake()->lastName($gender),
             'phone' => fake()->phoneNumber(),
+            'email' => fake()->email(),
             'address' => fake()->address(),
             'active' => fake()->randomElement([true, false]),
         ];

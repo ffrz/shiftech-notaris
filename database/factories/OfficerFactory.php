@@ -18,8 +18,9 @@ class OfficerFactory extends Factory
      */
     public function definition(): array
     {
+        $gender = fake()->randomElement(['male', 'female']);
         return [
-            'name' => fake()->name(),
+            'name' => fake()->firstName($gender) . ' ' . fake()->lastName($gender),
             'description' => fake()->sentence(25),
             'active' => fake()->randomElement([true, false]),
         ];

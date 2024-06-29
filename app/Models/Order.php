@@ -26,6 +26,7 @@ class Order extends BaseModel
      */
     protected $fillable = [
         'customer_id', 'officer_id', 'service_id', 'partner_id',
+        'deed_number', 'file_number', 'deed_properties',
         'date', 'closed_date', 'description', 'total', 'total_paid', 'notes', 'status'
     ];
 

@@ -28,6 +28,7 @@ class UserActivity extends Model
     public const OFFICER_MANAGEMENT = 'officer-management';
     public const PARTNER_MANAGEMENT = 'partner-management';
     public const SERVICE_MANAGEMENT = 'service-management';
+    public const ORDER_MANAGEMENT = 'order-management';
 
     private static $_types = [
         self::AUTHENTICATION => 'Otentikasi',
@@ -48,6 +49,7 @@ class UserActivity extends Model
         self::OFFICER_MANAGEMENT => 'Pengelolaan Officer',
         self::PARTNER_MANAGEMENT => 'Pengelolaan Partner',
         self::SERVICE_MANAGEMENT => 'Pengelolaan Layanan',
+        self::ORDER_MANAGEMENT => 'Pengelolaan Pesanan',
     ];
 
     protected $casts = [

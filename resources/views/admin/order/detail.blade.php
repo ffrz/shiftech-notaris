@@ -15,10 +15,10 @@
         <div class="card-header">
           <h3 class="card-title">
             <i class="fas fa-file-lines mr-1"></i>
-            Pesanan #{{ $item->id }}
+            Informasi Pesanan
           </h3>
         </div>
-        <div class="tab-content card-body" id="myTabContent">
+        <div class="card-body">
           <div class="row">
             <div class="col-lg-12">
               <h5>Info Pesanan</h5>
@@ -62,9 +62,9 @@
                   <td>Rp. {{ format_number($item->total_paid) }}</td>
                 </tr>
                 <tr>
-                    <td>Piutang</td>
-                    <td>Rp. {{ format_number($item->total - $item->total_paid) }}</td>
-                  </tr>
+                  <td>Piutang</td>
+                  <td>Rp. {{ format_number($item->total - $item->total_paid) }}</td>
+                </tr>
                 <tr>
                   <td>Officer</td>
                   <td>{{ $item->officer->name }}</td>
@@ -92,6 +92,69 @@
                   <td>Alamat</td>
                   <td>{{ $item->customer->address }}</td>
                 </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">
+            <i class="fas fa-file-lines mr-1"></i>
+            Informasi Proses
+          </h3>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-lg-12">
+              <table class="table table-sm table-striped table-bordered">
+                <thead>
+                  <tr>
+                    <th>No</th>
+                    <th>Proses</th>
+                    <th>Biaya</th>
+                    <th>Selesai</th>
+                    <th>Diambil</th>
+                    <th>Tgl Diambil</th>
+                    <th>Biaya</th>
+                    <th>Catatan</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="text-center" colspan="8">Belum tersedia</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">
+            <i class="fas fa-file-lines mr-1"></i>
+            Informasi Tagihan
+          </h3>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-lg-12">
+              <table class="table table-sm table-striped table-bordered">
+                <thead>
+                  <tr>
+                    <th>Kode</th>
+                    <th>Tanggal</th>
+                    <th>Uraian</th>
+                    <th>Jenis</th>
+                    <th>Jumlah</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="text-center" colspan="5">Belum tersedia</td>
+                  </tr>
+                </tbody>
               </table>
             </div>
           </div>
