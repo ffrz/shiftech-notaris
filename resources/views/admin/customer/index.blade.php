@@ -1,6 +1,6 @@
 @extends('admin._layouts.default', [
-    'title' => 'Pelanggan',
-    'menu_active' => 'sales',
+    'title' => 'Klien',
+    'menu_active' => 'order',
     'nav_active' => 'customer',
 ])
 
@@ -42,7 +42,6 @@
             <table class="table table-bordered table-striped table-sm">
               <thead>
                 <tr>
-                  <th style="width:10%">Kode</th>
                   <th style="width:30%">Nama</th>
                   <th>No Telepon</th>
                   <th>Alamat</th>
@@ -52,7 +51,6 @@
               <tbody>
                 @forelse ($items as $i => $item)
                   <tr class="{{ $filter['active'] == -1 && !$item->active ? 'table-danger' : '' }}">
-                    <td>{{ $item->idFormatted() }}</td>
                     <td>{{ $item->name }}</td>
                     <td>{{ $item->phone }}</td>
                     <td>{{ $item->address }}</td>
@@ -70,7 +68,7 @@
                   </tr>
                 @empty
                   <tr class="empty">
-                    <td colspan="5">Tidak ada rekaman untuk ditampilkan.</td>
+                    <td colspan="4">Tidak ada rekaman untuk ditampilkan.</td>
                   </tr>
                 @endforelse
               </tbody>

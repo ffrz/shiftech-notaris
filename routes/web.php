@@ -10,13 +10,13 @@ use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ExpenseController;
 use App\Http\Controllers\Admin\OfficerController;
+use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\PartnerController;
 use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\SettingsController;
 use App\Http\Controllers\Admin\UserActivityController;
 use App\Http\Controllers\Admin\UserController;
-use App\Http\Controllers\Admin\UserGroupController;
 use App\Http\Controllers\Admin\WitnessController;
 use App\Http\Controllers\Public\ServiceOrderController as PublicServiceOrderController;
 use App\Http\Middleware\Authenticate;
@@ -58,6 +58,13 @@ Route::middleware([Authenticate::class, OnlyAdmin::class])->prefix('admin')->gro
     });
 
     Route::controller(CustomerController::class)->prefix('customer')->group(function () {
+        Route::get('', 'index');
+        Route::match(['get', 'post'], 'edit/{id}', 'edit');
+        Route::get('delete/{id}', 'delete');
+        Route::get('detail/{id}', 'detail');
+    });
+
+    Route::controller(OrderController::class)->prefix('order')->group(function () {
         Route::get('', 'index');
         Route::match(['get', 'post'], 'edit/{id}', 'edit');
         Route::get('delete/{id}', 'delete');

@@ -21,6 +21,34 @@
           </a>
         </li>
 
+        {{-- Order Menu Begin --}}
+        @if (Auth::user()->canAccess(AclResource::ORDER_MENU))
+          <li class="nav-item {{ $menu_active == 'order' ? 'menu-open' : '' }}">
+            <a class="nav-link {{ $menu_active == 'order' ? 'active' : '' }}" href="#">
+              <i class="nav-icon fas fa-file-lines"></i>
+              <p>
+                Pesanan
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a class="nav-link {{ $nav_active == 'order' ? 'active' : '' }}" href="{{ url('/admin/order') }}">
+                  <i class="nav-icon fas fa-file-lines"></i>
+                  <p>Pesanan</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link {{ $nav_active == 'customer' ? 'active' : '' }}" href="{{ url('/admin/customer') }}">
+                  <i class="nav-icon fas fa-users"></i>
+                  <p>Klien</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+        @endif
+        {{-- End of Order Menu --}}
+
         {{-- Expense Menu Begin --}}
         @if (Auth::user()->canAccess(AclResource::EXPENSE_MENU))
           <li class="nav-item {{ $menu_active == 'expense' ? 'menu-open' : '' }}">

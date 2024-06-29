@@ -5,32 +5,33 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\AclResource;
 use App\Models\Customer;
-use App\Models\Party;
 use App\Models\UserActivity;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 class CustomerController extends Controller
 {
+    public function __construct()
+    {
+        ensure_user_can_access(AclResource::CUSTOMER_MANAGEMENT);
+    }
+
     public function index(Request $request)
     {
-        ensure_user_can_access(AclResource::CUSTOMER_LIST);
-
         $filter = [
             'active' => (int)$request->get('active', 1),
             'search' => $request->get('search', ''),
         ];
 
         $q = Customer::query();
-        $q->where('type', '=', Party::TYPE_CUSTOMER);
 
         if ($filter['active'] != -1) {
             $q->where('active', '=', $filter['active']);
         }
 
         if (!empty($filter['search'])) {
-            $q->where('id2', '=', $filter['search']);
-            $q->orWhere('name', 'like', '%' . $filter['search'] . '%');
+            $q->where('name', 'like', '%' . $filter['search'] . '%');
             $q->orWhere('phone', 'like', '%' . $filter['search'] . '%');
             $q->orWhere('address', 'like', '%' . $filter['search'] . '%');
         }
@@ -42,16 +43,10 @@ class CustomerController extends Controller
     public function edit(Request $request, $id = 0)
     {
         if (!$id) {
-            ensure_user_can_access(AclResource::ADD_CUSTOMER);
             $item = new Customer();
-            $item->id2 = Party::getNextId2(Party::TYPE_CUSTOMER);
             $item->active = true;
         } else {
-            ensure_user_can_access(AclResource::EDIT_CUSTOMER);
-            $item = Customer::find($id);
-            if (!$item) {
-                return redirect('admin/customer')->with('warning', 'Pelanggan tidak ditemukan.');
-            }
+            $item = Customer::findOrFail($id);
         }
 
         if ($request->method() == 'POST') {
@@ -90,9 +85,10 @@ class CustomerController extends Controller
 
     public function delete($id)
     {
-        ensure_user_can_access(AclResource::DELETE_CUSTOMER);
-
         $item = Customer::findOrFail($id);
+
+        DB::beginTransaction();
+        $item->delete();
 
         $message = 'Pelanggan ' . e($item->name) . ' telah dihapus.';
         UserActivity::log(
@@ -101,11 +97,12 @@ class CustomerController extends Controller
             $message,
             $item->toArray()
         );
+        DB::commit();
 
         return redirect('admin/customer')->with('info', $message);
     }
 
-    public function detail(Request $request, $id)
+    public function detail($id)
     {
         $item = Customer::findOrFail($id);
         return view('admin.customer.detail', compact('item'));

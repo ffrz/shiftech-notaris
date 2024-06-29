@@ -15,6 +15,7 @@ class AclResource
     const FINANCE_MENU = 'finance-menu';
     const WITNESS_MENU = 'witness-menu';
     const OFFICER_MENU = 'officer-menu';
+    const ORDER_MENU = 'order-menu';
 
     // reports
     const VIEW_REPORTS = 'view-reports';
@@ -28,6 +29,7 @@ class AclResource
     const PARTNER_MANAGEMENT = 'partner-management';
     const SERVICE_MANAGEMENT = 'service-management';
     const SETTINGS = 'settings';
+    const CUSTOMER_MANAGEMENT = 'customer-management';
 
     // cash transaction
     const CASH_TRANSACTION_CATEGORY_MANAGEMENT = 'cash-transaction-category-management';
@@ -38,15 +40,13 @@ class AclResource
     const EXPENSE_CATEGORY_MANAGEMENT = 'expense-category-management';
     const EXPENSE_MANAGEMENT = 'expense-management';
 
-    // customers
-    const CUSTOMER_LIST = 'customer-list';
-    const ADD_CUSTOMER = 'add-customer';
-    const EDIT_CUSTOMER = 'edit-customer';
-    const DELETE_CUSTOMER = 'delete-customer';
-
     public static function all()
     {
         return [
+            'Manajemen Order' => [
+                self::ORDER_MENU => 'Menu Pesanan',
+                self::CUSTOMER_MANAGEMENT => 'Kelola Pelanggan',
+            ],
             'Manajemen Keuangan' => [
                 self::FINANCE_MENU => 'Menu Keuangan',
                 self::CASH_ACCOUNT_MANAGEMENT => 'Kelola Akun / Rekening',
