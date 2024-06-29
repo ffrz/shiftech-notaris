@@ -1,5 +1,5 @@
 @php
-  $title = 'Rincian Pelanggan';
+  $title = 'Rincian Klien';
   use App\Models\StockUpdate;
   use App\Models\ServiceOrder;
 @endphp
@@ -17,68 +17,56 @@
         <div class="card-header" style="padding:0;border-bottom:0;">
           <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item">
-              <a class="nav-link active" id="tab1-tab" data-toggle="tab" href="#tab1"
-                role="tab"aria-controls="tab1">Info Pelanggan</a>
+              <a class="nav-link active" id="tab1-tab" data-toggle="tab" href="#tab1" role="tab"aria-controls="tab1">Info Klien</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" id="tab2-tab" data-toggle="tab" href="#tab2" role="tab"
-                aria-controls="tab2">Riwayat Pesanan</a>
+              <a class="nav-link" id="tab2-tab" data-toggle="tab" href="#tab2" role="tab" aria-controls="tab2">Riwayat Pesanan</a>
             </li>
           </ul>
         </div>
         <div class="tab-content card-body" id="myTabContent">
           <div class="tab-pane fade show active" id="tab1" role="tabpanel" aria-labelledby="tab1-tab">
             <div class="row">
-              <div class="col-lg-4">
-                <table class="table info table-striped">
+              <div class="col-lg-12">
+                <table class="table table-sm table-striped table-bordered">
                   <tr>
-                    <td>Nama</td>
-                    <td>:</td>
+                    <td style="width:25%">Nama</td>
                     <td>{{ $item->name }}</td>
                   </tr>
                   <tr>
                     <td>Telepon</td>
-                    <td>:</td>
                     <td>{{ $item->phone }}</td>
                   </tr>
                   <tr>
                     <td>Alamat</td>
-                    <td>:</td>
                     <td>{{ $item->address }}</td>
                   </tr>
                   <tr>
                     <td>Status</td>
-                    <td>:</td>
                     <td>{{ $item->active ? 'Aktif' : 'Non Aktif' }}</td>
                   </tr>
                   <tr>
                     <td class="text-nowrap">Jumlah Order</td>
-                    <td>:</td>
                     <td>{{ format_number($item->sales_count) }} kali</td>
                   </tr>
                   <tr>
                     <td class="text-nowrap">Total Transaksi</td>
-                    <td>:</td>
                     <td>Rp. {{ format_number($item->total_sales) }}</td>
                   </tr>
                   <tr>
                     <td class="text-nowrap">Total Keuntungan</td>
-                    <td>:</td>
                     <td>Rp. {{ format_number($item->total_profit) }}</td>
                   </tr>
                   <tr>
                     <td class="text-nowrap">Total Piutang</td>
-                    <td>:</td>
                     <td>Rp. {{ format_number($item->total_receivable) }}</td>
                   </tr>
                   <tr>
                     <td class="text-nowrap">Jumlah Order</td>
-                    <td>:</td>
                     <td>{{ format_number($item->order_count) }} kali</td>
                   </tr>
                   <tr>
                     <td>Catatan</td>
-                    <td>:</td>
                     <td>{!! nl2br(e($item->notes)) !!}</td>
                   </tr>
                 </table>
@@ -118,12 +106,12 @@
                             </div>
                           </td>
                         </tr>
-                      @empty
+                      @empty --}}
                         <tr class="empty">
-                          <td colspan="7">Tidak ada rekaman untuk ditampilkan.
+                          <td colspan="6">Tidak ada rekaman untuk ditampilkan.
                           </td>
                         </tr>
-                      @endforelse --}}
+                      {{-- @endforelse --}}
                     </tbody>
                   </table>
                 </div>

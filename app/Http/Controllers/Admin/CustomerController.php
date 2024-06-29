@@ -52,9 +52,15 @@ class CustomerController extends Controller
         if ($request->method() == 'POST') {
             $validator = Validator::make($request->all(), [
                 'name' => 'required|max:100',
+                'phone' => 'required',
+                'address' => 'required',
+                'email' => 'nullable|email'
             ], [
                 'name.required' => 'Nama pelanggan harus diisi.',
                 'name.max' => 'Nama pelanggan terlalu panjang, maksimal 100 karakter.',
+                'phone.required' => 'Nomor telepon harus diisi',
+                'address.required' => 'Alamat harus diisi.',
+                'email.email' => 'Email tidak valid',
             ]);
 
             if ($validator->fails())

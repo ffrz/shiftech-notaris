@@ -4,7 +4,7 @@
 
 @extends('admin._layouts.default', [
     'title' => $title,
-    'menu_active' => 'sales',
+    'menu_active' => 'order',
     'nav_active' => 'customer',
     'form_action' => url('admin/customer/edit/' . (int) $item->id),
 ])
@@ -23,16 +23,7 @@
       <div class="card card-primary">
         <div class="card-body">
           <div class="form-group">
-            <label for="id">Kode Pelanggan</label>
-            <input type="text" readonly class="form-control" id="id" value="{{ $item->idFormatted() }}">
-            @error('id')
-              <span class="text-danger">
-                {{ $message }}
-              </span>
-            @enderror
-          </div>
-          <div class="form-group">
-            <label for="name">Nama Pelanggan</label>
+            <label for="name">Nama Pelanggan <span class="required">*</span></label>
             <input type="text" class="form-control @error('name') is-invalid @enderror" autofocus id="name"
               placeholder="Masukkan nama pelanggan" name="name" value="{{ old('name', $item->name) }}">
             @error('name')
@@ -42,7 +33,7 @@
             @enderror
           </div>
           <div class="form-group">
-            <label for="phone">No. Telepon</label>
+            <label for="phone">No. Telepon <span class="required">*</span></label>
             <input type="text" class="form-control @error('phone') is-invalid @enderror" id="phone"
               placeholder="Masukkan no telepon pelanggan" name="phone" value="{{ old('phone', $item->phone) }}">
             @error('phone')
@@ -52,10 +43,20 @@
             @enderror
           </div>
           <div class="form-group">
-            <label for="address">Alamat</label>
+            <label for="address">Alamat <span class="required">*</span></label>
             <textarea class="form-control @error('address') is-invalid @enderror" name="address" id="address" cols="30"
               rows="4">{{ old('address', $item->address) }}</textarea>
             @error('address')
+              <span class="text-danger">
+                {{ $message }}
+              </span>
+            @enderror
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="text" class="form-control @error('email') is-invalid @enderror" id="email"
+              placeholder="Contoh: email@domain.com" name="email" value="{{ old('email', $item->email) }}">
+            @error('email')
               <span class="text-danger">
                 {{ $message }}
               </span>
@@ -67,7 +68,7 @@
                 {{ old('active', $item->active) ? 'checked="checked"' : '' }}>
               <label class="custom-control-label" for="active" title="Akun aktif dapat digunakan">Aktif</label>
             </div>
-            <div class="text-muted">Pelanggan tidak aktif disembunyikan di transaksi.</div>
+            <div class="text-muted">Pelanggan tidak aktif disembunyikan di pemesanan.</div>
           </div>
           <div class="form-group">
             <label for="notes">Catatan</label>
