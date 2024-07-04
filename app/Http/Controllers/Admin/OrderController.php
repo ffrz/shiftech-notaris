@@ -13,6 +13,7 @@ use App\Models\Service;
 use App\Models\UserActivity;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 
 class OrderController extends \App\Http\Controllers\Controller
@@ -99,6 +100,47 @@ class OrderController extends \App\Http\Controllers\Controller
         $services = Service::select(['id', 'name'])->orderBy('name', 'asc')->get();
         $partners = Partner::select(['id', 'name'])->orderBy('name', 'asc')->get();
         return view('admin.order.edit', compact('item', 'customers', 'officers', 'partners', 'services'));
+    }
+
+    public function close(Request $request, $id)
+    {
+        $item = Order::findOrFail($id);
+
+        if ($request->method() == 'POST') {
+            $validator = Validator::make($request->all(), [
+                'total' => 'required',
+                'status' => 'required|integer|between:1,2',
+            ], [
+                'total.required' => 'Biaya harus diisi.',
+                'status.required' => 'Pilih status.',
+                'status.between' => 'Status tidak valid.',
+            ]);
+
+            if ($validator->fails()) {
+                return redirect()->back()->withInput()->withErrors($validator);
+            }
+
+            $data = ['Old Data' => $item->toArray()];
+            $tmpData = $request->only('total', 'notes');
+            $tmpData['total'] = number_from_input($tmpData['total']);
+
+            $item->fill($tmpData);
+            $item->status = Order::STATUS_CLOSED;
+            $item->closed_date = current_date();
+            $item->save();
+            $data['New Data'] = $item->toArray();
+
+            UserActivity::log(UserActivity::ORDER_MANAGEMENT, 'Penutupan Pesanan', 'Pesanan #' . $item->id . ' telah ditutup', $data);
+
+            return redirect('admin/order/detail/' . $item->id)->with('info', 'Pesanan telah disimpan.');
+        }
+
+        $customers = Customer::select(['id', 'name'])->orderBy('name', 'asc')->get();
+        $officers = Officer::select(['id', 'name'])->orderBy('name', 'asc')->get();
+        $services = Service::select(['id', 'name'])->orderBy('name', 'asc')->get();
+        $partners = Partner::select(['id', 'name'])->orderBy('name', 'asc')->get();
+
+        return view('admin.order.close', compact('item', 'customers', 'officers', 'partners', 'services'));
     }
 
     public function delete($id)

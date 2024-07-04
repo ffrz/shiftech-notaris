@@ -67,6 +67,7 @@ Route::middleware([Authenticate::class, OnlyAdmin::class])->prefix('admin')->gro
     Route::controller(OrderController::class)->prefix('order')->group(function () {
         Route::get('', 'index');
         Route::match(['get', 'post'], 'edit/{id}', 'edit');
+        Route::match(['get', 'post'], 'close/{id}', 'close');
         Route::get('delete/{id}', 'delete');
         Route::get('detail/{id}', 'detail');
     });

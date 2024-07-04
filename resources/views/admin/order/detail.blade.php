@@ -8,6 +8,15 @@
     'nav_active' => 'customer',
 ])
 
+@section('right-menu')
+  @if ($item->status == 0)
+    <li class="nav-item">
+      <a class="btn btn-primary" href="{{ url('/admin/order/close/' . $item->id) }}"><i class="fas fa-file-circle-check mr-1"></i>Closing</a>
+      <a class="btn btn-danger" href="{{ url('/admin/order/cancel/' . $item->id) }}"><i class="fas fa-file-circle-xmark mr-1"></i>Pembatalan</a>
+    </li>
+  @endif
+@endSection
+
 @section('content')
   <div class="row">
     <div class="col-lg-12">
@@ -36,8 +45,8 @@
                   <td>{{ $item->closed_date ? format_date($item->closed_date) : '-' }}</td>
                 </tr>
                 <tr>
-                  <td class="text-nowrap">Status Pesanan</td>
-                  <td>{{ $item->statusFormatted() }}</td>
+                  <td class="text-nowrap {{ $item->status == 1 ? 'text-success' : ($item->status == 2 ? 'text-danger' : 'text-orange') }}">Status Pesanan</td>
+                  <td class="{{ $item->status == 1 ? 'text-success' : ($item->status == 2 ? 'text-danger' : 'text-orange') }}" >{{ $item->statusFormatted() }}</td>
                 </tr>
                 <tr>
                   <td>Layanan</td>
@@ -107,7 +116,7 @@
         <div class="card-body">
           <div class="row">
             <div class="col-lg-12">
-              <table class="table table-sm table-striped table-bordered">
+              <table class="table table-sm table-bordered">
                 <thead>
                   <tr>
                     <th>No</th>
